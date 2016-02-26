@@ -1,5 +1,5 @@
 #! /bin/bash
-npm install
+sudo npm install
 mkdir lib/ &2> /dev/null
 wget "http://code.jquery.com/jquery-2.2.1.min.js" -O "lib/jquery.js"
 wget "https://github.com/twbs/bootstrap/releases/download/v3.3.6/bootstrap-3.3.6-dist.zip" -O "lib/bootstrap.zip"

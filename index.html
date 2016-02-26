@@ -1,14 +1,77 @@
+<!DOCTYPE html>
 <html>
-<head>
-</head>
-<body>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Taxi4Paris</title>
+    <script src="http://maps.googleapis.com/maps/api/js"></script>
+    <style>
+      div#googleMap {
+        width: 100%;
+        height: 100%;
+      }
+      html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+      #navbar{
+        position:fixed;
+        color: #777;
+        text-decoration: none;
+      
+        bottom: 2%;
+        height: 10%;
+        left: 30%;
+        width: 40%;
+        min-height: 40px;
+        padding-right: 20px;
+        padding-left: 20px;
+        background-color: #fafafa;
+        background-image: -moz-linear-gradient(top,#fff,#f2f2f2);
+        background-image: -webkit-gradient(linear,0 0,0 100%,from(#fff),to(#f2f2f2));
+        background-image: -webkit-linear-gradient(top,#fff,#f2f2f2);
+        background-image: -o-linear-gradient(top,#fff,#f2f2f2);
+        background-image: linear-gradient(to bottom,#fff,#f2f2f2);
+        background-repeat: repeat-x;
+        border: 1px solid #d4d4d4;
+        -webkit-border-radius: 4px;
+        -moz-border-radius: 4px;
+        border-radius: 4px;
+        filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffffff',endColorstr='#fff2f2f2',GradientType=0);
+        -webkit-box-shadow: 0 1px 4px rgba(0,0,0,0.065);
+        -moz-box-shadow: 0 1px 4px rgba(0,0,0,0.065);
+        box-shadow: 0 1px 4px rgba(0,0,0,0.065);
+
+      }
+    </style>
+    <script type="text/javascript" src="lib/jquery.js"></script>
+  </head>
+  <body>
   <script src="./node_modules/socket.io-client/socket.io.js"></script>
+  <script type="text/javascript" src="main.js"></script>
   <script>
     var socket = io.connect('http://localhost:8000');
-    socket.on('news', function (data) {
-      console.log(data);
-      socket.emit('my other event', { my: 'data' });
+    socket.on('start_taxis', function (data) {
+      // data[id].lat
+      // data[id].long
+
+    //  socket.emit('refresh_taxis', { my: 'data' });
+    });
+
+    socket.on('refresh_taxis', function (data) {
+
     });
   </script>
-</body>
-</html>
+
+  <script>
+    /*$(document).ready(appelWeather);*/
+  </script>
+
+  <div id="googleMap"></div>
+
+  <div id="navbar">HEHOOOOO</div>
+
+  </body>
+  </html>
