@@ -3,6 +3,7 @@ var $ = require('jquery')(require('jsdom').jsdom().parentWindow);
 
 var io = require('socket.io').listen(8000);
 
+<<<<<<< HEAD
 io.sockets.on('connection', function (socket){
 
   $.getJSON( "taxis.json", function( data ) {
@@ -31,6 +32,7 @@ io.sockets.on('connection', function (socket){
     socket.emit('news', res);
 
    });
+
 
 
 });
