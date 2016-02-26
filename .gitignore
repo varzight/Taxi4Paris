@@ -1,0 +1,5 @@
+node_modules
+*.log
+lib/*
+node/taxis.json
+.DS_Store
