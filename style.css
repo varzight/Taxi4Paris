@@ -7,18 +7,21 @@ html, body {
   margin: 0;
   padding: 0;
 }
+#navbar p{
+  margin: 10px;
+}
 #navbar{
   position:fixed;
   color: #777;
   text-decoration: none;
 
   bottom: 2%;
-  height: 10%;
+/*  height: 10%;*/
+  height: auto;
   left: 30%;
   width: 40%;
   min-height: 40px;
-  padding-right: 20px;
-  padding-left: 20px;
+
   background-color: #fafafa;
   background-image: -moz-linear-gradient(top,#fff,#f2f2f2);
   background-image: -webkit-gradient(linear,0 0,0 100%,from(#fff),to(#f2f2f2));

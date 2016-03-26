@@ -9,7 +9,40 @@ function initialize() {
  mapTypeId: google.maps.MapTypeId.ROADMAP
 };
   map=new google.maps.Map(document.getElementById("googleMap"), mapProp);
+  var socket = io.connect('http://127.0.0.1:8000');
+  socket.on('news', function (data) {
+    markers = [];
+    console.log(data.length);
+  for (i = 0; i < data.length; i++)
+  {
+    markers[parseInt(data[i].id)] = new google.maps.Marker({
+      position: new google.maps.LatLng(data[i].lat, data[i].lon),
+      icon: 'car.png'
+    });
+    markers[parseInt(data[i].id)].addListener('click', listeners(parseInt(data[i].id)));
+    markers[parseInt(data[i].id)].setMap(map);
 
+  }
+});
+
+}
+
+google.maps.event.addDomListener(window, 'load', initialize);
+
+function listeners(index)
+{
+  return function()
+  {
+    map.setCenter(markers[index].getPosition());
+    map.setZoom(16);
+    $('#navbar p').empty();
+    $('#navbar p').text('Taxi '+index+' successfully ordered');
+    taxi_move(index, function() {
+      $('#navbar').fadeOut(1000);
+      $('#navbar p').html('<strong>Taxi '+index+' has arrived.</strong>');
+      $('#navbar').fadeIn(1000);
+     });
+  };
 }
 
 function taxi_move(i, end_eval)
@@ -34,10 +67,4 @@ function taxi_move(i, end_eval)
     }
   }, 50);
 
-
-
-
-  //return true;
 }
-
-google.maps.event.addDomListener(window, 'load', initialize);

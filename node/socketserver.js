@@ -15,14 +15,13 @@ io.sockets.on('connection', function (socket){
     res.on('end', function() {
         data = JSON.parse(body);
 
+        console.log('push taxis');
          var res = [];
          var i = 0;
          for(i=1; i< data.length;i++){
            var taxi = data[i];
 
            if(typeof taxi.geometry=="undefined"){
-             console.log(i);
-             console.log(taxi);
 
            }
            else{

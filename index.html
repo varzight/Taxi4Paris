@@ -16,51 +16,14 @@
   <script src="./node_modules/socket.io-client/socket.io.js"></script>
   <script type="text/javascript" src="main.js"></script>
   <script>
-    var socket = io.connect('http://localhost:8000');
 
-    function listeners(index)
-    {
-      return function()
-      {
-        map.setCenter(markers[index].getPosition());
-        map.setZoom(16);
-        $('#navbar p').empty();
-        $('#navbar p').text('Taxi '+index+' successfully ordered');
-        taxi_move(index, function() {
-          $('#navbar p').html('<strong>Taxi '+index+' have arrived.</strong>');
-          $('#navbar').animate({top: '90%'}, 3000, function() { $('#navbar').css('top', '0%');});
-         });
-      };
-    }
-
-    socket.on('news', function (data) {
-      markers = [];
-
-    for (i = 0; i < data.length; i++)
-    {
-      markers[parseInt(data[i].id)] = new google.maps.Marker({
-        position: new google.maps.LatLng(data[i].lat, data[i].lon),
-        icon: 'car.png'
-      });
-      markers[parseInt(data[i].id)].setMap(map);
-      markers[parseInt(data[i].id)].addListener('click', listeners(parseInt(data[i].id)));
-    }
-    });
-
-    socket.on('refresh_taxis', function (data) {
-
-    });
-  </script>
-
-  <script>
-    /*$(document).ready(appelWeather);*/
   </script>
 
   <div id="googleMap"></div>
 
   <div id="navbar">
   <p>
-    To order a taxi, please click on the nearest regarding your location.
+    To order a taxi, click on it
   </p>
   </div>
 
