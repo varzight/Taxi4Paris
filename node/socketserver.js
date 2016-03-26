@@ -1,38 +1,47 @@
-
-var $ = require('jquery')(require('jsdom').jsdom().parentWindow);
-
 var io = require('socket.io').listen(8000);
-
-<<<<<<< HEAD
 io.sockets.on('connection', function (socket){
 
-  $.getJSON( "taxis.json", function( data ) {
-     var res = [];
-     var i = 0;
-     for(i=1; i< data.length;i++){
-       var taxi = data[i];
+  require('http').request({
+    host: '127.0.0.1',
+    port: '8080',
+    path: '/node/taxis.json',
+    method: 'GET'
+}, function(res) {
+    res.setEncoding('utf8');
+    var body = '';
+    res.on('data', function(chunk) {
+        body += chunk;
+    });
+    res.on('end', function() {
+        data = JSON.parse(body);
 
-       if(typeof taxi.geometry=="undefined"){
-         console.log(i);
-         console.log(taxi);
+         var res = [];
+         var i = 0;
+         for(i=1; i< data.length;i++){
+           var taxi = data[i];
 
-       }
-       else{
+           if(typeof taxi.geometry=="undefined"){
+             console.log(i);
+             console.log(taxi);
 
-         var el = {
-          id: taxi.fields.station_id,
-          lon: taxi.geometry.coordinates[0],
-          lat: taxi.geometry.coordinates[1]
+           }
+           else{
 
-         };
-         res.push(el);
-       }
-     }
+             var el = {
+              id: taxi.fields.station_id,
+              lon: taxi.geometry.coordinates[0],
+              lat: taxi.geometry.coordinates[1]
 
-    socket.emit('news', res);
+             };
+             res.push(el);
+           }
+         }
 
-   });
+        socket.emit('news', res);
 
+})
+
+}).end();
 
 
 });
